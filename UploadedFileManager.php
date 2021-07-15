@@ -4,6 +4,8 @@
 namespace File;
 
 
+use File\Repository\FileRepository;
+
 class UploadedFileManager extends FileManager
 {
     public function get(string $path)
