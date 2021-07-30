@@ -10,7 +10,7 @@ class UploadedFileManager extends FileManager
 {
     public function get(string $path)
     {
-        preg_match('/^[0-9a-fA-F]*/', $path, $out)[0];
+        preg_match('/^[0-9a-fA-F]*/', $path, $out);
         $id = $out[0] ?? null;
         $info = (new FileRepository())->getByIdString($id);
         if ($info == null) {
