@@ -30,7 +30,7 @@ class File
 
     public function getDir()
     {
-        $dir = __DIR__.'/../../'.($_ENV['UploadedFiles']??'UploadedFiles');
+        $dir = __DIR__.'/../../'.($_ENV['UploadedFiles'] ?? 'UploadedFiles');
         if (!is_dir($dir)) {
             mkdir($dir, 0777, true);
         }

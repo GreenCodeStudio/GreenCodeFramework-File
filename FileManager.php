@@ -10,12 +10,12 @@ class FileManager
     {
         header('cache-control: max-age=31536000, public, immutable');
         header('x-sw-cache: 1');
-        header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', time() + (60 * 60 * 24)));
+        header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + (60 * 60 * 24)));
         if ($this->isImageReformat() && ($mime == 'image/jpeg' || $mime == 'image/png')) {
             $this->reformatImage($filepath, $mime);
         } else {
             //header('Content-Disposition: attachment; filename="'.$filename.'"');
-            header('content-type: ' . $mime);
+            header('content-type: '.$mime);
             $file = fopen($filepath, 'r');
             while ($data = fread($file, 1024)) {
                 echo $data;
@@ -31,11 +31,11 @@ class FileManager
 
     protected function reformatImage($filepath, $mime)
     {
-        $tmpPath = __DIR__ . '/../../Tmp/img_' . md5(($_GET['width'] ?? '') . '_' . ($_GET['width'] ?? '') . '_' . ($_GET['width'] ?? '') . '_' . $filepath) . '.' . $this->mimeToExtension($mime);
+        $tmpPath = __DIR__.'/../../Tmp/img_'.md5(($_GET['width'] ?? '').'_'.($_GET['width'] ?? '').'_'.($_GET['width'] ?? '').'_'.$filepath).'.'.$this->mimeToExtension($mime);
         if (!is_file($tmpPath)) {
             $this->reformatImageDirect($filepath, $mime, $tmpPath);
         }
-        header('content-type: ' . $mime);
+        header('content-type: '.$mime);
         $file = fopen($tmpPath, 'r');
         while ($data = fread($file, 1024)) {
             echo $data;
